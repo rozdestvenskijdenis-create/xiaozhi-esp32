@@ -124,13 +124,27 @@ bool MqttProtocol::StartMqttClient(bool report_error) {
                     }
                 });
             }
-        } else if (on_incoming_json_ != nullptr) {
-            on_incoming_json_(root);
-        }
-        cJSON_Delete(root);
-        last_incoming_time_ = std::chrono::steady_clock::now();
-    });
 
+            } else if (strcmp(type->valuestring, "radio") == 0) {
+        // Жестко прописываем ссылку прямо в коде:
+        const char* my_radio_url = "http://ep256.hostingradio.ru:8052/europaplus256.mp3";
+        
+        ESP_LOGI(TAG, "Received radio command, playing hardcoded URL");
+        Application::getInstance().CloseAudioChannel(false);
+        
+        auto player = Board::GetInstance().GetAudioPlayer();
+        if (player != nullptr) {
+            player->PlayUrl(my_radio_url); // Передаем нашу фиксированную ссылку
+        }
+        }
+        
+if (on_incoming_json_ != nullptr) {
+        on_incoming_json_(root);
+    }
+    cJSON_Delete(root);
+    last_incoming_time_ = std::chrono::steady_clock::now()
+        }) ;
+    
     ESP_LOGI(TAG, "Connecting to endpoint %s", endpoint.c_str());
     std::string broker_address;
     int broker_port = 8883;
@@ -149,7 +163,7 @@ bool MqttProtocol::StartMqttClient(bool report_error) {
 
     ESP_LOGI(TAG, "Connected to endpoint");
     return true;
-}
+
 
 bool MqttProtocol::SendText(const std::string& text) {
     if (publish_topic_.empty()) {
