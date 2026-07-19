@@ -6,7 +6,18 @@
       "sdkconfig_append": [
         "CONFIG_OLED_SSD1306_128X32=y",
         "CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y",
-        "CONFIG_ESPTOOLPY_FLASHSIZE=\"4MB\"",
+        "CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y",
+        "CONFIG_PARTITION_TABLE_CUSTOM=y",
+        "CONFIG_PARTITION_TABLE_CUSTOM_FILENAME=\"partitions_4mb.csv\"",
+        "CONFIG_PARTITION_TABLE_FILENAME=\"partitions_4mb.csv\""
+      ]
+    },
+    {
+      "name": "bread-compact-wifi-128x64",
+      "sdkconfig_append": [
+        "CONFIG_OLED_SSD1306_128X64=y",
+        "CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y",
+        "CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y",
         "CONFIG_PARTITION_TABLE_CUSTOM=y",
         "CONFIG_PARTITION_TABLE_CUSTOM_FILENAME=\"partitions_4mb.csv\"",
         "CONFIG_PARTITION_TABLE_FILENAME=\"partitions_4mb.csv\""
