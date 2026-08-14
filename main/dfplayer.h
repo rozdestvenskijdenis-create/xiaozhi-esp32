@@ -11,7 +11,7 @@ extern "C" {
 // Пины UART (измените под вашу плату если нужно)
 #define DFPLAYER_UART_NUM    UART_NUM_1
 #define DFPLAYER_TX_PIN      17
-#define DFPLAYER_RX_PIN      16
+#define DFPLAYER_RX_PIN      18
 #define DFPLAYER_BAUD_RATE   9600
 
 void dfplayer_init(void);
