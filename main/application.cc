@@ -164,6 +164,9 @@ void Application::Initialize() {
 
     // Update the status bar immediately to show the network state
     display->UpdateStatusBar(true);
+    
+    dfplayer_init();                 // ← ДОБАВЬТЕ ЭТУ СТРОКУ
+}
 }
 
 void Application::Run() {
