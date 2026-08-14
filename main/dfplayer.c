@@ -46,7 +46,7 @@ void dfplayer_init(void) {
         .parity = UART_PARITY_DISABLE,
         .stop_bits = UART_STOP_BITS_1,
         .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
-        .source_clk = UART_SCLK_APB,
+        .source_clk = UART_SCLK_DEFAULT,
     };
     
     uart_param_config(DFPLAYER_UART_NUM, &uart_config);
