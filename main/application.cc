@@ -164,9 +164,9 @@ void Application::Initialize() {
 
     // Update the status bar immediately to show the network state
     display->UpdateStatusBar(true);
-    
-    dfplayer_init();                 // ← ДОБАВЬТЕ ЭТУ СТРОКУ
-}
+
+    // Инициализация DFPlayer Mini
+    dfplayer_init();
 }
 
 void Application::Run() {
@@ -607,6 +607,21 @@ void Application::InitializeProtocol() {
                     glyphs.clear();
                 }
                 ESP_LOGI(TAG, ">> %s", text->valuestring);
+                
+                // ===== ОБРАБОТКА КОМАНД ДЛЯ DFPLAYER =====
+                std::string text_str = text->valuestring;
+                if (text_str.find("включи музыку") != std::string::npos) {
+                    dfplayer_play_folder(1, 1);
+                } else if (text_str.find("выключи музыку") != std::string::npos ||
+                           text_str.find("останови музыку") != std::string::npos) {
+                    dfplayer_stop();
+                } else if (text_str.find("следующий трек") != std::string::npos) {
+                    dfplayer_next();
+                } else if (text_str.find("предыдущий трек") != std::string::npos) {
+                    dfplayer_prev();
+                }
+                // ===== КОНЕЦ ОБРАБОТКИ =====
+                
                 Schedule([display, message = std::string(text->valuestring),
                           glyphs = std::move(glyphs), bpp]() {
                     display->AddTextGlyphs(glyphs, bpp);
